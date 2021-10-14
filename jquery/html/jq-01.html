@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .b{
+            width: 50px;
+            height: 50px;
+            background: red;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div id="dbox">
+        <div id="box">haha</div>
+        <h2>en</h2>
+        <p class="aa">p</p>
+        <p>hh</p>
+        <em>em</em>
+        <ul>
+            <li>li-1</li>
+            <li>li-2</li>
+            <li>li-3</li>
+            <li>li-4</li>
+            <li class="aa">li-5</li>
+        </ul>
+        <button id="jia">加一个li</button>
+        <input type="text" name="" id="txt" value = "123">
+        <input type="text" name="" id="tet">
+        <button id="btn">冲！！</button>
+    </div>
+    <script src="../js/jquery-1.10.1.min.js"></script>
+    <script>
+        /*
+            jquery就是一个javascript框架  可以更好的操作页面的dom元素。  让js使用起来更加方便
+            目前最新的版本是3.x的版本，jquery从2.x版本开始就不支持ie678.
+        
+        */ 
+        $(function(){
+            // jq的基本选择器  
+            $("#dbox").css("background","");
+            $("ul li:odd").css("background","pink");
+            $("ul li:even").css("background","green")
+
+            $("input").eq(1).css("background","green")
+            $("input:eq(0)").css("background","pink")
+
+            $("ul li").filter(".aa").css("background","blue")
+            $("#dbox").filter(".aa").css("background","yellow")   // 没有效果   所以只能在小范围使用   大范围使用无效
+
+
+
+
+            // jq是可以链式调用的
+            $("#box").mouseenter(function(){
+                $(this).css("background","blue")      //  此时的this为js对象   需要用$()包起来  代表jq对象
+            }).mouseleave(function(){
+                $(this).css("background","red")
+            })
+
+
+
+
+
+            // jq的取值和赋值   html()   val()
+            $("#box").html("嘿嘿");
+            console.log($("#box").html());
+            $("input:eq(1)").val("111111")
+            console.log($("input:eq(1)").val());
+
+
+
+            // filter    not   has
+
+            // filter  需要在同级关系下
+            $("#dbox p").filter(".aa").css("background","red");
+
+            // not   除了选择的这个之外所有的同级相同元素
+            $("#dbox p").not(".aa").css("background","red");
+
+            // has   是否包含    有的话看最前面是谁   一般会是上一层的元素   使上一层的元素改变
+            $("#dbox ul").has(".aa").css("background","red");
+
+
+
+            
+
+        })
+    </script>
+</body>
+</html>
