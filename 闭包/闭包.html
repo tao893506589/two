@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>a</button><button>a</button><button>a</button><button>a</button><button>a</button><button>a</button>
+    <script>
+        /* 
+            什么是闭包？
+                1. 函数嵌套函数
+                    2. 内部函数引用外部函数的变量
+                    3. 被引用的变量或者形参不会被垃圾回收机制进行回收，常驻内存
+                在函数中的一些变量，作用域   在函数被调用后，   js的内部垃圾回收机制会回收这些内部变量
+
+            为什么使用闭包？
+                    1.希望一个变量常驻内存
+                    2.避免全局变量的污染
+                    3.声明私有变量的时候
+                注意： 有些时候，需要减少定义全局变量，避免它的污染问题
+
+                简单来说  就是在函数中定义一个函数   然后返回内部函数
+
+
+
+            好处   
+                    模块化  
+                    可以在循环中设置index值   找到对应的索引
+
+
+                在IE中可能会引发内存泄漏
+                作用：   可以从一个域中取出原本访问不到的变量进行使用
+
+
+                立即执行函数
+                    ()()
+                前一个是将函数包起来    后一个是定义完之后就立即执行    也可以在第二个（）里传参数    在定义函数时接收参数进行使用
+        */
+
+
+
+        
+        var btns = document.querySelectorAll("button");
+        for(var i = 0;i<btns.length;i++){
+
+        // 普通写法  index的使用
+            // btns[i].index = i;
+            // btns[i].onclick = function(){
+            //     console.log(this.index);
+            // }
+       
+
+
+        // 立即函数的写法解决循环的i问题
+        btns[i].onclick = function(index){   // 此时的index是立即函数的第二个（）中的参数传过来的
+            var a = 1;
+            return function(){
+                a++;
+                console.log(index,a);
+            }
+        }(i)
+        
+        
+        }
+    </script>
+</body>
+</html>
