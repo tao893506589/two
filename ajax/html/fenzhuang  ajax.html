@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">冲！！</button>
+
+
+    <!-- 引入封装好的ajax请求js -->
+    <script src="../js/QF.js"></script>
+    <script>
+
+        var btn = document.getElementById("btn")
+        btn.onclick = function(){
+            // 使用封装好的ajax文件
+            //  此时需要开启服务器和数据库
+            // 重要的是可以直接使用封装好的请求
+            QF.get("../php/zhuce.php",{username:"haha",password:"321"},function(data){
+                console.log(data);
+            })
+        }
+    </script>
+</body>
+</html>

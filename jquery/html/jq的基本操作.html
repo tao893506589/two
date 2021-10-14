@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            jquery就是一个javascript框架  可以更好的操作页面的dom元素。  让js使用起来更加方便
+            目前最新的版本是3.x的版本，jquery从2.x版本开始就不支持ie678.
+               
+            
+            jq可以链式调用      this代表js对象改为jq对象时用$()包起来
+            
+            jq的取值和赋值  html()    val()  一般用于表单
+
+            filter    not   has
+                filter  需要在同级关系下
+                not   除了选择的这个之外所有的同级相同元素
+                has   是否包含    有的话看最前面是谁   一般会是上一层的元素   使上一层的元素改变
+            
+                节点的选择
+                next下一个同级元素    prev上一个同级元素   eq通过下标获取第几个      
+                index获取当前元素在当前兄弟元素的下标     
+                attr设置和修改属性  修改多个时写在对象里
+
+            jq中节点元素的操作
+                 被操作              把操作
+                • insertBefore()     before()
+                • insertAfter()      after()
+                • appendTo()        [ append()    --》 相当于原生js的appendChild方法 ]
+                • prependTo()        prepend()
+                • remove()
+
+            addClass    removeClass
+
+            width   height   相关
+                width()       innerWidth()  width+padding       outerWidth() width+padding+border        outerWidth(true)  width+padding+border+margin
+                height()  innerHeight()  outerHeight()     和width相同
+            
+            添加事件也可以使用on关键字添加多个事件
+                给一个元素添加不同处理机制的不同时间    这时候参数给一个对象就可以
+                事件委托    解决的是后来添加的元素没有事件的问题       解决的思路是    当前元素的事件给到上一层元素   通过事件的冒泡进行触发
+                    此时是三个参数   第一个为事件   第二个为触发元素    第三个是处理事件      绑定在上一层的父级身上
+            
+            事件的解绑用  off     
+                直接用不写参数是把所有事件都解绑       
+                有参数是解绑当前的事件          
+                第二个参数是一个函数时是取消事件的发生效果
+        
+            相关参数的一些操作     函数中的e
+                e.stopPropagation()         阻止事件冒泡
+                e.preventDefault()           阻止默认事件的发生
+                e.which                      获取按的哪个键或者按钮
+                e.pageX     e.pageY          整个页面中鼠标的位置
+                e.clientX      e.clientY     当前视口鼠标的位置
+                return false                 阻止事件冒泡和默认事件的发生
+
+            offset()     直接获取当前元素，距离左边的距离,margin不算在内     一般使用   offset().left()
+            position()   直接获取当前元素距离第一个有定位父节点的距离,margin算在内
+            通过css方式获取不到值    为auto
+            
+            val             取值只会取到第一个符合条件的值       赋值会将所有符合条件的元素都赋值      适合在表单控件中使用
+            size            获取元素的个数
+            each            相当于for each循环     参数是一个函数   函数有两个参数   第一个为下标   第二个为当前下标代表的元素
+            
+            动画类的常用：
+                    hover       两个参数   每个参数都是函数      第一个参数是mouseenter事件       第二个参数是mouseout事件
+                    hide        隐藏        第一个参数为持续的毫秒值        第二个参数为动画执行结束后的回调函数
+                    show        显示        与hide的用法相同
+                    toggle()    用于显示和隐藏进行切换
+                    fadeIn()    淡入 (透明度：0-1)
+                    fadeOut()   淡出 (透明度：1-0)
+                    fadeTo(动画持续时间，透明度0-1，回调函数)
+
+                    slideDown       从上到下卷
+                    slideUp         从下到上
+
+                    animate
+                        默认动画形式是满快慢的形式
+                        我们可以在每次调用animate之前先去调用stop(true)一次，清除上面所有的动画之后再去绑定新的动画效果。
+                    delay() 延迟方法
+            
+            remove方法
+                并不会保留这个元素节点之前的事件和行为 
+            detach方法
+                会保留这个元素节点之前的事件与行为
+            
+            remove  和   detach     都会返回当前输出的元素    可以设置变量进行接收
+
+            text()方法 相当于原生js的innerText
+            html()方法 相当于原生js的innerHTML
+            val()方法  相当于原生js的value
+
+            siblings        同辈的其他元素
+            nextall         某一元素后的所有同辈元素
+            prevall         某一元素前的所有同辈元素
+            prevuntil       往前寻找符合条件的同辈元素   中间的都被选中   不包括条件元素
+            nextuntil       往后寻找符合条件的同辈元素    中间的都被选中   不包括条件元素
+            parentsuntil    往上寻找符合条件的父级元素      中间被包括   不包括条件父元素
+
+            parent    找到上一个父节点
+            parents   找到所有的父节点，可以传入选择器      只有符合条件的才被操作
+            closest   必须传入选择器,向上去找，只获取第一个符合条件的元素，包含自身。
+        
+            wrap()     每一个获取到的元素节点单独包装
+            wrapAll()  将符合条件的所有的元素全都包裹在某个节点中
+            wrapInner() 内部包裹  将后面的包裹进前面的内容中
+            unwrap()   删除包装  删除上面一层包装，不包括body节点
+
+            clone()  默认只会克隆节点本身，并不会克隆节点元素的事件行为
+            clone(true) 既克隆元素本身，又会为元素添加事件行为
+            slice()     进行选择器的裁剪   相当于有选择性的操作节点
+
+            serialize方法       将表单字段收集好拼接完毕-querystring      拼接成地址类型的字符串
+            serializeArray方法  将表单数据变成jsonArray形式的数组        即数组里面是一个个的对象
+
+            trigger() 可以触发官方定义的事件以外，还可以触发我们的自定义事件       可以理解成通过另一个元素的事件触发让原本事件触发
+
+            get()  方法会将jquery对象转成js原生对象   再次转回jquery对象应该在外层加上$()
+            
+            jquery的工具方法 挂载到$下面的。
+                $.type() --> 判别数据类型（object/array/date都可以判别出来）
+                $.inArray(item,array) --> 返回item在array的下标，找不到返回-1 
+                $.noConflict --> 给jquery对象起名字
+                $.parseJSON()    ==>  JSON.parse()       转成json格式的对象格式
+                $.makeArray()   ==>  Array.from() 将伪数组转成数组。 
+
+
+            $.extend()     拓展工具方法       $.xxx()               可以定义很多方法    在外部利用$.进行方法的调用
+            $.fn.extend()  拓展jquery方法    $(选择器).xxx()     
+            也可以直接使用$.name = functiong(){}写    然后用$.name()进行调用
+            
+            jquery的cookie的一些操作
+
+                $.cookie()
+
+                // 设置cookie
+                $.cookie(name,value,{
+                    raw:false  //默认就是false，将value进行编码操作
+                })
+
+                // 根据cookie的名字获取cookie的value值
+                $.cookie(name)
+
+                // 删除cookie
+                $.cookie(name,null)
+         */ 
+
+    </script>
+</body>
+</html>

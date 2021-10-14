@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+            cookie？
+                cookie:
+                    可以设置过期时间的
+                    最大可以存储4kb，并且每一个域名下最多可以存储50条左右cookie信息。
+
+                cookie的语法：
+                    cookie 由名/值对形式的文本组成：name=value。完整格式为：   
+                    name=value;[expires=date];[path=path];[domain=somewhere.com];[secure]，
+                    中括号是可选，name=value 是必选。
+            
+                    encodeURIComponent 将中文编译成对应的字符
+                    decodeURIComponent 将对应的字符编码成中文  
+
+
+                        
+                
+            cookie的其他
+                    expires=date 设置cookie的过期时间，并且系统会自动的清除掉过期的cookie      常用
+                    path 限制访问路径  如果不去设置，默认就是当前加载文件的路径;如果路径不一致，就会设置cookie失败。
+                    domain 限制访问域名 如果不去设置，默认就是加载当前.html文件的服务器的域名|ip;如果加载当前文件的域名与设置的域名不一致，就会设置cookie失败。
+                    secure 不设置它，默认http协议就可以进行文件加载。如果secure,只能通过https进行文件加载。
+                    https 需要证书认证协议。
+        
+        */ 
+
+        // 创建cookie   
+             document.cookie = 'username='+encodeURIComponent("哈哈")
+        // 获取cookie
+           console.log(decodeURIComponent(document.cookie));
+    </script>
+</body>
+</html>

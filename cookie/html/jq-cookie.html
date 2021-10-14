@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <!-- 引入jq.js时要注意前后  -->
+    <script src="../../jquery/js/jquery-1.10.1.min.js"></script>   
+    <script src="../../jquery/js/jquery.cookie.js"></script>
+    
+    <script>
+
+        // jq 操作cookie的方法
+            // 设置cookie
+            $.cookie("username","haha",{    
+                raw:false       // 默认为false   将第二个参数进行编码操作
+            });
+            console.log($.cookie("username"));
+    </script>
+</body>
+</html>

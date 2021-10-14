@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="../js/cookie.js"></script>
+    <script>
+
+        /*
+            利用封装好的cookie进行创建
+            setcookie()  三个参数   第一个为名字  第二个为值   第三个为其他的信息
+
+            getCookie()   参数传cookie的名字      获取cookie
+
+            removeCookie()   参数传cookie名字     删除cookie
+        */ 
+       setCookie("username","hahaha",{
+           expires:7
+       })
+       console.log(getCookie("username"));  // hahaha
+
+
+       removeCookie("username")
+       console.log(getCookie("username"));    // null
+
+    </script>
+</body>
+</html>

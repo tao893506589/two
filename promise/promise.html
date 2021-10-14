@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">冲！！</button>
+
+
+    <script src="../ajax/js/QF.js"></script>
+    <script>
+
+        // promise的作用
+        //  解决异步请求的回调地狱问题
+        function one(){
+            return new Promise(function(resolve,reject){
+                QF.get("./json/a.json",{},function(data){
+                    if(data.error ===0){
+                        resolve(data)
+                    }else{
+                        reject(data)
+                    }
+                })
+            })
+        }
+
+        function two(){
+            return new Promise(function(resolve,reject){
+                QF.get("./json/b.json",{},function(data){
+                    if(data.error ===0){
+                        resolve(data)
+                    }else{
+                        reject(data)
+                    }
+                })
+            })
+        }
+
+        function three(){
+            return new Promise(function(resolve,reject){
+                QF.get("./json/c.json",{},function(data){
+                    if(data.error ===0){
+                        resolve(data)
+                    }else{
+                        reject(data)
+                    }
+                })
+            })
+        }
+
+
+
+        var btn = document.querySelector("button")
+        btn.onclick = function(){
+            // 建立一个promise实例
+            var p = one()
+            // 进行异步操作
+            p.then(function(data){
+                console.log("one  成功",data,data.id);
+                return two()
+            })
+            .then(function(data){
+                console.log("two  成功",data,data.id);
+                return three()
+            })
+            .then(function(data){
+                console.log("three  成功",data,data.id);
+                return three()
+            })
+            .catch(function(data){
+                console.log("出错了",data);
+            })
+        }
+        
+    </script>
+</body>
+</html>
