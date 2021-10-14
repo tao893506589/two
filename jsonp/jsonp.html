@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <button id="btn">冲！！</button>
+    <script>
+
+        /*
+            jsonp  解决的是跨域的问题  
+            跨域涉及到同源策略
+                同源策略？  协议需要相同、域名|IP需要相同、端口号需要相同。
+            
+
+            解决方法   jsonp
+
+            jsonp解决跨域？（根据script标签的src属性可以访问其它源资源的特点！）
+                1.先去声明一个函数，这个函数有一个形参，这个参数就可以获取到后端返回的数据了
+                2.在需要加载数据的时候，动态的创建script，将src属性设置成需要访问的跨域接口地址
+                3.当script标签插入到页面的时候，就会调用第一步声明的函数，获取后端的跨域数据。
+
+            jsonp问题？
+               只能支持get请求的跨域！ 因为需要在url地址栏后面追加复写的函数名。
+        */ 
+
+
+
+        // 先进行jsonp进行跨域请求
+        window.onload = function(){
+            let btn = document.getElementById("btn")
+            btn.onclick = function(){
+                // 创建一个script标签  进行跨域
+                let sc = document.createElement("script");
+                // 这里设置的是一个api接口      接口地址：  https://api.asilu.com/
+                sc.src = 'https://query.asilu.com/weather/baidu?city=青岛&callback=we'
+                document.body.appendChild(sc)
+            }
+        }
+
+
+
+        // 这里写的是请求回来的回调函数   在这里拿到数据进行操作
+        function we(data){
+            console.log(data);
+        }
+    </script>
+</body>
+</html>
