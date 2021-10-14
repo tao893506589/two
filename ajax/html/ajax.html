@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax</title>
+</head>
+<body>
+        <button id="btn">冲！！</button>
+
+    <script>
+
+        var btn = document.getElementById("btn");
+        btn.onclick = function(){
+            // ajax请求         第一步
+            var h = new XMLHttpRequest();
+            // 第二步   建立连接 
+            h.open("get","../js/a.js",true)
+            // 第三步   发送正文
+            h.send();
+            // 第四步   添加事件
+            h.onreadystatechange = function(){
+                // 等到所有数据传输完毕  此时的readyState值为4
+                if(h.readyState === 4){
+                    // 将后端数据转为对象形式   方便观看
+                    // var data = JSON.parse(h.responseText)
+                    var data = h.responseText
+                    console.log(data);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
