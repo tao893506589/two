@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p></p>
+    <ul></ul>
+
+
+    <script src="../../jquery/js/jquery-3.4.1.min.js"></script>
+    <script>
+        /*
+            jquery的ajax操作
+                $.get()
+                $.post()
+                $.delete()
+                $.patch()
+                $.ajax()
+            $.ajax()包括了以上的，会有不同的参数进行设置
+
+    
+        */ 
+
+
+        // jq-Ajax请求本地文件
+        // $.ajax({
+        //     type:'get',             //  请求方式
+        //     url:"./ajax.html",      // 请求路径
+        //     data:{},                // 前端传给后端的参数
+        //     success:function(data){
+        //         console.log(data);
+        //         document.write(data)
+        //     },
+        //     error:function(error){
+        //         console.log(error);
+        //     }
+        // })
+
+
+
+        // jq-ajax  请求线上接口
+        // $.ajax({
+        //     type:'get',
+        //     url:"https://query.asilu.com/weather/baidu?callback=?",    //  接口地址
+        //     data:{
+        //         city:"北京"
+        //     },
+        //     dataType:'jsonp',           // 后端返回的接口数据的类型
+        //     success:function(data){   
+        //         console.log(data);      // 可以先看一下请求到的数据是什么样的
+        //         $("p").html(data.city);
+        //         $(data.weather).each((index,item)=>{
+        //             // $("ul").append(`<li>${index+1} - ${item.date} / ${item.weather}</li>`);
+        //             $(`<li>${index+1} - ${item.date} / ${item.weather}</li>`).appendTo($("ul"))
+        //         })
+        //     },
+        //     error:function(error){
+        //         console.log(error);
+        //     }
+        // })
+
+
+
+        // 也可以通过$.getJSON方法来获取jsonp接口的数据
+            // $.getJSON  三个参数   
+            // 第一个为url地址（get方式）   第二个为传递的数据      第三个为回调函数   参数为得到的数据   通过数据进行操作
+            $.getJSON('https://query.asilu.com/weather/baidu?callback=?',{
+                city:'北京'
+            },function(data){
+                console.log(data);
+            })
+
+    </script>
+</body>
+</html>
