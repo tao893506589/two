@@ -7,7 +7,8 @@
     "start": "nodemon file.js",
     "qs":"nodemon querystring.js",
     "rl":"nodemon readline.js",
-    "http":"nodemon http.js"
+    "http":"nodemon http.js",
+    "static":"nodemon static-http.js"
   },
   "keywords": [],
   "author": "",
