@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#banner{
+    width: 800px;
+    height: 600px;
+    border: 1px solid red;
+    position: relative;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    margin:  auto;
+    background-color: bisque;
+    overflow: hidden;
+}
+ol{
+    width: 120px;
+    height: 30px;
+    list-style: none;
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+    z-index: 1;
+}
+ol li{
+    width: 22px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    float: left;
+    border: 1px solid rebeccapurple;
+}
+.a{
+    background-color: salmon;
+}
+ul{
+    width: 800px;
+    height: 3600px;
+    list-style: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+ul li{
+    width: 800px;
+    height: 600px;
+}
+ul li img{
+    width: 100%;
+    height: 100%;
+}
