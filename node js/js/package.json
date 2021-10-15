@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon file.js",
     "qs":"nodemon querystring.js",
-    "rl":"nodemon readline.js"
+    "rl":"nodemon readline.js",
+    "http":"nodemon http.js"
   },
   "keywords": [],
   "author": "",
