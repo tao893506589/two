@@ -8,7 +8,8 @@
     "qs":"nodemon querystring.js",
     "rl":"nodemon readline.js",
     "http":"nodemon http.js",
-    "static":"nodemon static-http.js"
+    "static":"nodemon static-http.js",
+    "url":"nodemon url.js"
   },
   "keywords": [],
   "author": "",
