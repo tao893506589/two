@@ -1,0 +1,38 @@
+#shop{
+    width: 1000px;
+    height: 700px;
+    background-color: aqua;
+    position: relative;
+    left: 250px;
+    top: 50px;
+
+}
+#shop .left{
+    width: 200px;
+    height: 700px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: bisque;
+}
+#shop .left li{
+    list-style: none;
+    height: 57px;
+    border-bottom: 1px solid #854122;
+}
+#shop .right{
+    width: 800px;
+    height: 700px;
+    position: absolute;
+    left: 200px;
+    top: 0;
+}
+#shop .right div{
+    width: 800px;
+    height: 700px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: none;
+    background-color: chartreuse;
+}
