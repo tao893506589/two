@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*  
+            promise.all()   处理多个异步   
+                多个形成一个数组，全部成功才成功  有一个失败就失败
+            promise.race()  处理多个异步
+                多个形成一个数组  谁最快处理谁   状态跟随最快的异步的状态
+        */ 
+
+
+        let p1 = new Promise(function(resolve,reject){
+            resolve("成功")
+        })
+        let p2 = new Promise((resolve,reject)=>{
+            resolve("成功")
+        })
+        let p3 = Promise.reject("失败")
+
+        Promise.all([p1,p2,p3]).then(resule =>{
+            console.log(resule);
+        }).catch(err =>{
+            console.log(err);
+        })
+
+
+
+        Promise.race([p1,p2,p3]).then(result =>{
+            console.log(result);
+        }).catch(err =>{
+            console.log(err);
+        })
+    </script>
+</body>
+</html>

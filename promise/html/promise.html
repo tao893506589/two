@@ -10,14 +10,14 @@
     <button id="btn">冲！！</button>
 
 
-    <script src="../ajax/js/QF.js"></script>
+    <script src="../../ajax/js/QF.js"></script>
     <script>
 
         // promise的作用
         //  解决异步请求的回调地狱问题
         function one(){
             return new Promise(function(resolve,reject){
-                QF.get("./json/a.json",{},function(data){
+                QF.get("../json/a.json",{},function(data){
                     if(data.error ===0){
                         resolve(data)
                     }else{
@@ -29,7 +29,7 @@
 
         function two(){
             return new Promise(function(resolve,reject){
-                QF.get("./json/b.json",{},function(data){
+                QF.get("../json/b.json",{},function(data){
                     if(data.error ===0){
                         resolve(data)
                     }else{
@@ -41,7 +41,7 @@
 
         function three(){
             return new Promise(function(resolve,reject){
-                QF.get("./json/c.json",{},function(data){
+                QF.get("../json/c.json",{},function(data){
                     if(data.error ===0){
                         resolve(data)
                     }else{
