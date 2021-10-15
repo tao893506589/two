@@ -4,7 +4,8 @@
   "description": "",
   "main": "file.js",
   "scripts": {
-    "start": "nodemon file.js"
+    "start": "nodemon file.js",
+    "qs":"nodemon querystring.js"
   },
   "keywords": [],
   "author": "",
