@@ -1,4 +1,18 @@
 $(function(){
+
+    // 前端元素太多  动态添加元素
+    let sum = 1
+    for(var i = 0;i<11;i++){
+        sum++
+        $(`<li>${sum}</li>`).appendTo($("#shop .left"))
+        $(`<div><a href="">${sum}</a></div>`).appendTo($("#shop .right"))
+    }
+
+
+
+
+
+
     // 鼠标进入左边时  让右边的选项显示
   var lis = $("#shop .left li");
   var divs = $("#shop .right div")
