@@ -1,0 +1,12 @@
+{
+  "name": "js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "file.js",
+  "scripts": {
+    "start": "nodemon file.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
