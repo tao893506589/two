@@ -1,0 +1,31 @@
+  先初始化一下   在全局中安装gulp            npm install gulp -g
+  在项目中还要再安装一次             npm install gulp
+  项目中安完会生成一个 node_modules文件夹和一个配置文件
+
+gulpfile.js    初始化之后 进行管理的js文件
+    这个js中需要先创建gulp.task   任务的意思
+    gulp.task()     第一个参数是任务名字        第二个参数为回调函数
+    在终端通过gulp 任务名运转
+
+
+
+gulp是什么？
+    gulp是一个基于流的前端自动化的构建工具    更规则化的管理文件
+
+
+
+
+gulp的功能
+    管理文件的工具    让文件更清晰   也可以实现压缩，实时监控动态等
+
+
+
+
+文件拷贝：
+    三个步骤：
+        1.gulp.src   找到需要处理的源文件
+        2.pipe      为处理找到的文件设置的管道
+        3.gulp.dest     将处理好的文件放在指定位置
+    多个执行方式：
+        gulp.series()   方法用于串行（顺序）执行
+        gulp.parallel() 方法用于并行执行
