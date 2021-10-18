@@ -1,0 +1,96 @@
+
+编译css的方式有很多
+    现在用的最多的是scss   sass
+    sass方式太复杂  格式也更严谨   使用起来不方便   有严格的缩进   没有大括号和分号
+    在生成文件时只有后缀名的不同   .sass    .scss
+
+在写scss文件时   可以使用类似js的写法  定义变量  然后进行引用   最后在进行编译   使用gulp进行编译  压缩  等
+
+
+
+scss基本语法:
+    1.变量的声明
+        a 普通变量 
+            定义变量必须使用$符号，变量在后面的赋值时可以直接全局使用
+        b 默认变量
+            在值的后面加上!default    可以被覆盖   只需要重新声明一下
+        c 全局变量 
+            在值的后面加上!global     不管在全局还是局部   定义完就是全局变量   可以全局使用
+        d 特殊变量
+            类似于``   中的用法   在使用变量的属性值属性时用#{}把变量包起来
+
+    2.  scss注释有三种方式 
+        a   // 这种方式在编译之后是没有的
+        b   /* */  这种方式在 编译成css保留   压缩不保留
+        c   /*!   */    强行注释   这种在编译成css之后保留   压缩之后也保留
+
+    3.  sass的嵌套
+        在嵌套的过程中有包含关系时   需要用到 & 找父元素   样式直接在父元素里写
+
+    4. sass混合使用    @mixin进行声明可以带参数    @inclode进行调用  也可以进行传参
+        参数要一一对应    
+        如果只用其中几个时   需要对参数单独进行赋值   然后传参
+        
+        @mixin  aaa($a:1px solid ,$b:10px){
+            border-bottom: $a;
+            border-left:$b;
+        }
+        div{
+            @inclode aaa($b:5px)        这样进行个别参数传递
+        }
+
+    5.  数据类型
+        > 数字(例如： 1.2, 13, 10px)
+        > 字符串(例如："foo", 'bar', baz)
+        > 颜色(例如：blue, #04a3f9, rgba(255, 0, 0, 0.5))
+        > 布尔值(例如： true, false)
+        > 空值(例如： null)
+        > 列表(list)，用空格或逗号分隔 (例如：c 1.5em 1em 0 2em, Helvetica, Arial, sans-serif)
+        > 映射(例如： (key1: value1, key2: value2))  map映射  键->值
+
+    6.sass  颜色   
+        分为常规的三种   十六进制      rgba         字符串
+    7.映射
+        先定义好  .scss文件    在使用@import进行引用
+        引用的是文件的名字   如果名字有_  可以省略_
+        剩下和混合一样使用
+    
+    8.继承      @extend
+        通过继承减少代码的写入，在继承时也可以进行扩展
+        使用时直接使用@extend 选择器的名字    进行继承
+    
+    9.  判断  if        利用if  进行判断和选择
+        @if   @else if  @else    
+        使用和css一样   只是在前面添加@符号   
+    10. 循环   @while   @for   @cach
+
+        @for $i from 1 to $count (to的意思不包含$count)
+        @for $i from 1 through $count(through的意思就是包含$count)
+    
+
+        @cach  类似each    主要用于列表和映射的循环   @cach  变量  in  列表/映射
+
+
+        @while（）   循环条件放在（）里
+    
+
+    11.  自定义函数的声明
+
+        进行判断属性是否在变量中   有则返回   没有就返回别的
+
+        $colors:(black:#111,white:#fff);
+
+        @function color($key){
+            @if not map-has-key($colors,$key) {
+                @error '映射中不存在：'+$key;
+            }
+            @return map-get($colors,$key);
+        }
+
+        body{
+            background:color(xxx);
+        }
+
+    12.  警告和错误
+        > @warn:警告信息
+        > @error:错误信息
