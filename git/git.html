@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+            git-> 版本控制工具
+            （用来管理文件夹的--时间节点） 
+            git也可以将本地的代码上传到远程仓库里面去（github | 码云）
+
+            git --version 出现git版本号
+
+            安装完成后，需要进行git相关的一些配置
+            右键git bush here 
+            git config --list
+            git config --global user.name '你的用户名'
+            git config --global user.email '你的邮箱号'
+
+
+            git常用命令：（工作区 --> 暂存区（git add 文件名） ---> 历史区（git commit -m ''））
+                git status (查看git的状态)
+                git init (初始化一个git仓库  .git一个隐藏文件夹)
+
+            将工作区的内容存放到暂存区中：
+                git add 文件名
+                git add 文件夹名
+                git add .  （把所有的文件都放入到暂存区中）
+
+                git diff 查看工作区与暂存区的差异
+                xxxx
+
+            暂存区撤回内容：
+                git reset HEAD -- 文件名
+            
+            将暂存区的内容提交到历史区
+                git commit -m '提交的具体说明'
+
+            将历史区的内容进行回退到指定版本（非常重要--》版本控制的体现）
+                git reset --hard 版本号
+
+            查看每一次命令的记录        通过记录找到此前最新的版本号
+                git reflog 
+
+            删除文件  
+                rm 文件名
+
+        */
+
+    </script>
+</body>
+</html>
