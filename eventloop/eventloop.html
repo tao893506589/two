@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+        /*
+            eventloop?   事件轮询
+                eventloopJavaScript的执行顺序调度
+                JavaScript是单线程    所以执行顺序大致分为  同步代码  (直接执行的)      异步代码  (分离执行)
+                异步代码的执行
+                    首先是前端分为两大类   宏任务队列     微任务队列
+                        红任务队列：  js的整体代码    setTimeout        setInterval()       i/o操作
+                        微任务队列：  promise的then()
+                执行顺序是 ：
+                    1.整体的js先进入    同步代码从上到下直接执行
+                    2.异步代码放在   web api中等待
+                    3.整体执行完之后   开始执行微任务队列    微任务队列执行完执行宏任务队列
+                    4.在执行宏任务队列和微任务队列时，产生的新的任务放在web  aip中等待
+                    5.循环往复执行即可
+                注意： eventloop的执行在调用栈中进行        eventloop是在宏任务队列和微任务队列中切换的    web  api是存放临时产生的任务的
+                    整体保持   队列的特点   先进先出
+
+
+
+                具体例子去网上找两个
+
+        */
+                    console.log('script start')      //  1.同步代码先输出  script start
+                    async function async1() {
+                        await async2()       //   当前面有await async时   下面的代码相当于是promise.then   被放进web api中   随后进入微任务队列
+                        console.log('async1 end')    // 5.  微任务队列的第一个   输出async1 end
+                    }
+                    async function async2() {
+                        console.log('async2 end') 
+                    }
+                    async1()                //   2.同步代码执行   此时的await async2()执行    输出async2 end
+                    setTimeout(function() {         //    异步代码    放入web api中   最终进入宏任务队列
+                        console.log('setTimeout')       //  8.   异步代码 宏任务队列执行时  输出setTimeout
+                    }, 0)
+                    new Promise(resolve => {
+                        console.log('Promise')          //  3.  同步代码   直接执行   输出Promise
+                        resolve()
+                    })
+                    .then(function() {
+                        console.log('promise1')    //  6.异步代码 微任务队列执行时  输出promise1
+                    })
+                    .then(function() {
+                        console.log('promise2')     //  7. 异步代码 微任务队列执行时  输出promise2
+                    })
+                    console.log('script end')       //  4.  同步代码   直接输出script end
+
+    </script>
+</body>
+</html>
