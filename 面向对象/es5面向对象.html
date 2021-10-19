@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+        
+        实例的__proto__属性指向了构造函数的Prototype
+        构造函数的Prottype对象的constructor属性 === 构造函数
+        公共的方法放置在原型对象上面的话，实例都会共享一块内存空间地址。
+        构造函数的原型对象的__proto__指向Object.prototype （Object.prototype.__proto__就是原型链顶层就是null）
+        构造函数没有的方法  会往上找   一直到function和object   都没有就是没有
+
+
+        */ 
+
+
+
+         /*
+
+            原型链:   
+                    Person （构造函数） ------>   Person.prototype(实例原型)
+                        |^-------------------------^-- 含有  constructor属性
+                        |                          |
+                    person (实例)  __proto__  --------------|   
+        */ 
+
+
+      
+        
+        
+        // es5中构造函数
+        function Person(name,age){
+            this.name = name
+            this.age = age
+        }
+        Person.prototype.sayHello = function(){
+            return 'hello'
+        }
+
+
+        // 创建对象
+        let person = new Person('张三',18)
+        let person2 = new Person('李四',20)
+
+
+        console.log(person.__proto__  === Person.prototype)  //实例的__proto__属性指向了构造函数的Prototype 
+        console.log(Person.prototype.constructor === Person) //构造函数的Prottype对象的constructor属性 === 构造函数
+        console.log(person.constructor === Person.prototype.constructor)
+        
+        console.log(person.sayHello === person2.sayHello)       //公共的方法放置在原型对象上面的话，实例都会共享一块内存空间地址。
+
+        console.log(Person.prototype.__proto__)  //构造函数的原型对象的__proto__指向Object.prototype （Object.prototype.__proto__就是原型链顶层就是null）
+ 
+        console.log(person.toString()) // 这个就是获取的Object.prototyp上面的toString方法。
+        
+        
+
+
+       
+
+
+    </script>
+</body>
+</html>

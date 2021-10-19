@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        // es5中构造函数
+        /* function Person(name,age){
+            this.name = name
+            this.age = age
+        }
+        Person.prototype.sayHello = function(){
+            return 'hello'
+        }
+
+        function Student(name,age){
+            this.name = name
+            this.age = age
+        }
+        // 原型继承
+        Student.prototype = Person.prototype 
+        // Student.prototype.isMarray = true  
+        // 创建对象
+        let person = new Person('张三',18)
+        let stu = new Student('lisi',18)
+        console.log(person.isMarray) */
+
+
+
+
+        // 组合式继承 （构造函数继承 + 原型继承）
+        // function Person(name,age){
+        //     this.name = name
+        //     this.age = age
+        // }
+        // Person.prototype.sayHello = function(){
+        //     return 'hello'
+        // }
+
+        // function Student(name,age){ 
+        //     Person.call(this,name,age)  // 相当于给student的实例对象上面添加了两个属性（name,age)
+        // }
+        // // 原型继承
+        // Student.prototype = new Person() 
+        // // 创建对象
+        // let stu = new Student('lisi',18)
+        // console.log(stu)
+
+
+
+        // 发现组合式继承最大的问题就是调用父类两次构造函数，如果父类的构造函数内容比较庞大，性能销毁开销大。
+        // 寄生组合式继承
+        // function Person(name,age){
+        //     this.name = name
+        //     this.age = age
+        // }
+        // Person.prototype.sayHello = function(){
+        //     return 'hello'
+        // }
+
+        // function Student(name,age,score){
+        //     Person.call(this,name,age)
+        //     this.score = score  
+        // }
+
+        // // 寄生式组合继承核心代码
+        // function extend(Student,Person){ 
+        //     function Fn(){}
+        //     Fn.prototype = Person.prototype
+        //     const fn = new Fn()
+        //     Student.prototype = fn
+        // }
+
+        // extend(Student,Person)
+
+        // let stu = new Student('张三',10,80)
+        // console.log(stu)
+
+
+
+        //es6 引入关键字class / extends
+        class Person{
+            constructor(name,age){   //  constructor 必须要写的   调用时调用的是这个
+                this.name = name
+                this.age = age
+            }
+            say(){
+                return 'person-say....'
+            }
+        }
+
+        class Student extends Person{    //  继承的关键字为  extends
+            constructor(name,age,score){  //   constructor   是子类必须写的  调用这个函数 就会执行这里面的东西
+                super(name,age) // Person.call(this,name,age)       继承时必须写这个 super()  有参数时写入参数
+                this.score = score
+            }
+        }
+
+        let person = new Person('张三',18)
+        let stu = new Student('李四',10,100)
+        console.log(stu)
+ </script>
+</body>
+</html>
