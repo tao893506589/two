@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /*
+            为了解决某一类问题提出了特点的解决方案
+                单例设计模式
+                观察者模式
+                发布订阅模式
+                策略模式
+
+            单例模式：
+                单个的实例
+                不管new多少次，都是这一个实例
+
+            应用？
+                自定义弹出层
+                每次显示的都是一个弹出框，只不过里面的内容是不固定的
+        */
+
+        /* function Person(){
+            this.name = 'jack'
+        }
+        // 加入单例模式的核心代码
+        let instance = null
+        function sigleTon(){
+            if(!instance) instance = new Person()
+            return instance
+        }
+        let p1 = sigleTon()
+        let p2 = sigleTon() */
+
+
+
+        // 发现单例模式化应该采用new关键字才可以，忽然上述没有new了，所以可以改进一下写法
+        /*
+            instance必须要保存下来，并且只能出现一份
+            可以采用闭包的写法，让instance变量在内存中只能出现一份
+            将构造函数Person放入闭包里面，避免全局污染
+        */
+
+        let SigleTon = (function(){
+            function Person(name){
+                this.name = name
+            }
+            let instance = null //让变量常驻内部，不会内垃圾回收机制回收。
+            return function(name){
+                if(!instance) instance = new Person(name)
+                return instance
+            }
+        })()
+        let p1 = new SigleTon('张三')
+        let p2 = new SigleTon('lsiisisisisi')
+        console.log(p1,p2,p1===p2)
+
+
+
+
+
+
+
+
+
+        /* 
+        回顾了闭包
+        let SigleTon = (function(){
+            let instance = 1 //让这个变量一直常驻内存，得不到释放
+            return function SigleTon(){
+                instance++
+                return instance
+            }
+        })()
+        let a = SigleTon()
+        let b = SigleTon()
+        console.log(b) */
+    </script>
+</body>
+</html>

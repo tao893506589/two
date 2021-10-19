@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /*
+            发布订阅模式
+                发布订阅模式里面包含三个模块： 发布者  订阅者  处理中心
+                发布者相当于某个杂志的负责人，来处理中心注册一个杂志，而订阅者相当于用户群体，在中心订阅这款杂志。
+
+                    订阅者（多个人） ---> 调度中心  《---- 发布者
+                例如：
+                    买书的例子。去书店买书发现书没有了，告知店员（处理中心），书如果到了，就给我打电话等方式。
+        
+        
+            店员有个属性message记录一些事件与行为
+            message={
+                a:[fn1,fn2],
+                b:[fn1,fn2,fn3,fn4]
+            }
+        
+        */
+
+        class Person{
+            constructor(){
+                this.message = {}
+            }
+
+            // 向消息队列中添加内容（记录一些事件与行为）
+            on(type,fn){
+                if(!this.message[type]){ 
+                    this.message[type] = [] // {'a书':[]}
+                }
+                this.message[type].push(fn) // {'a书':[handleA,handleB]}
+            }
+
+            // 触发消息队列
+            trigger(type){
+                // 如果对象不存在type，直接结束掉
+                if(!this.message[type]) return 
+                this.message[type].forEach(item=>{
+                    item()
+                })
+            }
+
+            // 删除消息队列内容
+            off(type,fn){
+                if(!fn){
+                    delete this.message[type]  //删除所有的事件
+                    return 
+                }
+                // 判断是否订阅过
+                if(!this.message[type]) return
+
+                // 订阅过了，就可以采用数组filter删除
+                this.message[type] = this.message[type].filter(item=>{
+                    if(item === fn){
+                        return false   // 从数组过滤掉
+                    }
+                    return true
+                })
+            }
+        }
+        const person = new Person()
+        // 店员需要记录行为，当行为出现的时候，店员需要做什么事情
+        person.on('a书',handleA)
+        person.on('a书',handleB)
+        person.on('b书',handleC)
+
+        
+        person.off('a书',handleB)
+        
+
+        // 知道a书发布了，需要通知订阅者 
+        person.trigger('a书')
+        person.trigger('b书')
+
+
+
+        console.log(person)
+        function handleA(){console.log('handleA')}
+        function handleB(){console.log('handleB')}
+        function handleC(){console.log('handleC')}
+    </script>
+</body>
+</html>

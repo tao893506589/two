@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;margin:0
+        }
+        .tip{
+            width:500px;
+            height:300px;
+            border:1px solid #999;
+            position: fixed;
+            top:0;
+            right:0;
+            bottom:0;
+            left:0;
+            margin:auto;
+            background-color: #fff;
+            display: none;
+        }
+        .top{
+            height:20px;
+            background-color: skyblue;
+            padding: 10px;
+        }
+        .top > span{
+            float: right;
+            width:20px;
+            height:20px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: #fff;
+            font-size: 16px;
+            text-align: center;
+            line-height: 20px;
+        }
+        .content{
+            height:210px;
+            overflow: hidden;
+            position: relative;
+        }
+        .content > p{
+            position: absolute;
+            top:50%;
+            left:20%;
+            text-align: center;
+            padding:0 20px;
+        }
+        .btns{
+            background-color: skyblue;
+            padding: 15px 30px;
+            height:20px;
+        }
+        .btns button{
+            float: right;
+            padding: 2px 10px;
+            margin-left: 10px;
+        }
+        </style>
+</head>
+<body>
+    <script>
+
+        /*
+        小案例  弹出框
+            
+            new多次后会在页面产生多个div   所以利用立即函数的不回收的机制    只产生一个div  
+
+
+        */
+
+
+
+        const Tip = (function(){
+            class Tip {         //  es6的语法   相当于es5的构造函数
+                constructor(){    //这里是重写了原型 在构造函数的原型上调用其他方法
+                    // 创建最外层的div
+                    this.ele = document.createElement('div');
+                    this.ele.className  = "tip"
+                    document.body.appendChild(this.ele)
+                    // 绑定初始化事件
+                    this.b()
+                }
+
+                // 创建初始化的事件
+                b(){
+                    // 通过点击不同的元素进行不同的操作   相当于添加事件
+                    this.ele.addEventListener("click",e=>{
+                        // 解决兼容
+                        e = e || window.event
+                        const target = e.target || e.srcElement
+                        // 通过判断class的不同添加不同的点击事件
+                        if(target.className === "close"){
+                            this.ele.style.display = "none";
+                        }
+                        if(target.className === "cancel"){
+                            this.ele.style.display = "none";
+                        }
+                        if(target.className === "ok"){
+                            console.log("确定....");
+                        }
+                    })
+                }
+
+                // 填充class为tip的div
+                c(txt){
+                    // 将模板上树   此时应该一个一个添加   这次直接上的模板
+                    this.ele.innerHTML = `
+                        <div class="top">
+                            标题
+                            <span class='close'>X</span>
+                        </div>
+                        <div class="content">
+                            <p>${txt}</p>
+                        </div>
+                        <div class='btns'>
+                            <button class='cancel'>取消</button>
+                            <button class='ok'>确定</button>
+                        </div>
+                        `
+                    // 最后显示出来
+                    this.ele.style.display = "block";
+                }
+            }
+                // 定义出来一个不被回收的变量
+                let d = null;
+                return function(txt){
+                    if(!d) d = new Tip()
+                    d.c(txt);
+                    return d
+                }
+
+        })()
+
+
+        // 最后创建实例
+        new Tip("你好")
+
+
+    </script>
+</body>
+</html>

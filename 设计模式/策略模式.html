@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            策略模式？
+                一个问题匹配多个解决方案，不一定要用到哪个解决方案
+                而且可能随时还会增加新的方案
+
+            例如：购物车结算案例
+                满100元减价10元
+                满200元减价25元
+                8折
+                7折
+        */
+
+        // function calcPrice(price,type){
+        //     if(type === "100_10"){
+        //         price -= 10
+        //     }
+        //     if(type === "200_25"){
+        //         price -= 25
+        //     }
+        //     if(type === "80%"){
+        //         price *= 0.8
+        //     }
+        //     return price
+        // }
+        // console.log(calcPrice(320,'80%'))
+
+
+        // 将多种方案放入闭包中
+        const calcPrice = (function(){
+            const sale = {  // 定义好折扣
+                '100_10':function(price){return price-=10 },
+                '200_25':function(price){return price-=25 },
+                '80%':function(price){return price*=.8 },
+            }
+
+            function computedPrice(price,type){
+                if(!sale[type]) return '没有'+type+'的折扣！'
+                return sale[type](price)
+            }
+            // 函数也可以作为对象类型，动态添加成员
+            computedPrice.add = function(type,fn){
+                if(sale[type]) return type+'折扣已经存在了！'
+                sale[type] = fn  // 对象有两种方式获取值  sale.属性名type  sale[变量type]
+            }
+
+            // 删除折扣方法
+            computedPrice.remove = function(type){
+                delete sale[type]
+            }
+            return computedPrice
+        })()
+
+        calcPrice.add('70%',function(price){ return price*=.7 })
+        console.log(calcPrice(100,'70%'))
+
+
+        // setInterval(()=>{
+        //     if(超过了爽11的12点){
+        //         calcPrice.remove('70%')
+        //     }
+        // },1000)
+    </script>
+</body>
+</html>

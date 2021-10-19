@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /*
+            观察者模式 （监控一个对象状态的改变，一旦状态改变了，马上触发自身技能）
+
+            我们现在坐在教室里面，就是被观察者
+            监控后面的老师就是观察者
+            当被观察者触发了一些条件的时候，观察者就会触发技能
+        */
+
+        // function Observer(name,fn){
+        //    this.name = name
+        //    this.fn = fn
+        // }
+           
+        // 创建观察者
+        class Observer{
+            constructor(name,fn){
+                this.name = name
+                this.fn = fn
+            }
+        }
+        const bzr = new Observer('班主任',(val)=>{console.log(val,'班主任说把你的爸爸找过来....')})
+        const xz = new Observer('校长',(val)=>{console.log(val,'批评班主任...')})
+
+        // 被观察者
+        class Student{
+            constructor(state){
+                this.state = state //记录学生目前的状态
+                this.observers = []  //保存观察者对象  [班主任对象，校长对象]
+            }
+            // 更改自身状态
+            setState(val){
+                this.state = val //更改自身状态
+                // 当学生状态改变了，需要触发观察者自身技能
+                this.observers.forEach(item=>{
+                    item.fn(val)   //  这里的fn函数调用的是观察者的实例方法
+                })
+            }
+            // 添加观察者
+            addObservers(observer){
+                // 如果存在就不需要添加了
+                // 从数组里面检查每一项和外面传入的observer对象是否一致，如果有一个一致的话，最终结果就是true.  (every)
+                let flag = this.observers.some(item=>{
+                    return item === observer
+                })
+                if(!flag) this.observers.push(observer)
+            }
+        }
+        const xiaoming = new Student('学习')
+        xiaoming.addObservers(bzr)
+        xiaoming.addObservers(xz)
+        console.log(xiaoming)
+        xiaoming.setState("游戏")
+    </script>
+</body>
+</html>
